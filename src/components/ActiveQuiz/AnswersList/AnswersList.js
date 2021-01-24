@@ -10,6 +10,7 @@ const AnswersList = props => (
                key={ index }
                answer={ answer }
                onAnswerClickHandler={ props.onAnswerClickHandler }
+               answerColorState={ props.answerColorState ? props.answerColorState[answer.id] : null }
             />
          )
       }) }

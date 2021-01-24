@@ -5,6 +5,7 @@ import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz'
 class Quiz extends Component {
    state = {
       activeQuestion: 0,
+      answerColorState: null, // { [id]: 'success' or 'error' }
       quiz: [
          {
             question: 'Россия - это',
@@ -30,11 +31,45 @@ class Quiz extends Component {
    }
 
    onAnswerClickHandler = (answerId) => {
-      console.log(answerId)
+      if (this.state.answerColorState) {
+         const key = Object.keys(this.state.answerColorState)[0]
 
-      this.setState({
-         activeQuestion: this.state.activeQuestion + 1
-      })
+         if (this.state.answerColorState[key] === 'success') {
+            return
+         }
+      }
+
+      const question = this.state.quiz[this.state.activeQuestion]
+
+      if (question.rightAnswerId === answerId) {
+
+         this.setState({
+            answerColorState: { [answerId]: 'success' }
+         })
+
+         const timeout = window.setTimeout(() => {
+
+            if (this.isFinished()) {
+               console.log('Конец')
+            } else {
+               this.setState({
+                  activeQuestion: this.state.activeQuestion + 1,
+                  answerColorState: null
+               })
+            }
+
+            window.clearTimeout(timeout)
+         }, 1000)
+
+      } else {
+         this.setState({
+            answerColorState: { [answerId]: 'error' }
+         })
+      }
+   }
+
+   isFinished = () => {
+      return this.state.activeQuestion + 1 === this.state.quiz.length
    }
 
    render() {
@@ -48,6 +83,7 @@ class Quiz extends Component {
                   onAnswerClickHandler={ this.onAnswerClickHandler }
                   quizLength={ this.state.quiz.length }
                   answerNumber={ this.state.activeQuestion + 1 }
+                  answerColorState={ this.state.answerColorState }
                />
             </div>
          </div>

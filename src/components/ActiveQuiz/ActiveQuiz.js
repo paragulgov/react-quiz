@@ -17,6 +17,7 @@ const ActiveQuiz = props => {
          <AnswersList
             answers={ props.answers }
             onAnswerClickHandler={ props.onAnswerClickHandler }
+            answerColorState={ props.answerColorState }
          />
       </div>
    )
