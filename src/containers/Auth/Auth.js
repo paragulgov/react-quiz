@@ -10,6 +10,7 @@ function validateEmail(email) {
 class Auth extends Component {
 
    state = {
+      isFormValid: false,
       formControls: {
          email: {
             value: '',
@@ -73,8 +74,6 @@ class Auth extends Component {
    }
 
    onChangeHandler = (event, controlName) => {
-      console.log(event.target.value)
-
       const formControls = { ...this.state.formControls }
       const control = { ...formControls[controlName] }
 
@@ -84,8 +83,15 @@ class Auth extends Component {
 
       formControls[controlName] = control
 
+      let isFormValid = true
+
+      Object.keys(formControls).forEach(name => {
+         isFormValid = formControls[name].valid && isFormValid
+      })
+
       this.setState({
-         formControls
+         formControls,
+         isFormValid
       })
    }
 
@@ -121,6 +127,7 @@ class Auth extends Component {
                   <Button
                      type='success'
                      onClick={ this.loginHandler }
+                     disabled={ !this.state.isFormValid }
                   >
                      Войти
                   </Button>
@@ -128,6 +135,7 @@ class Auth extends Component {
                   <Button
                      type='primary'
                      onClick={ this.registerHandler }
+                     disabled={ !this.state.isFormValid }
                   >
                      Зарегистрироваться
                   </Button>
