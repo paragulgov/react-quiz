@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classes from './Auth.module.css'
 import Button from '../../components/UI/Button/Button'
+import Input from '../../components/UI/Input/Input'
 
 class Auth extends Component {
 
@@ -23,18 +24,26 @@ class Auth extends Component {
                <h1>Авторизация</h1>
 
                <form onSubmit={ this.submitHandler } className={classes.AuthForm}>
-                  <input type="text" />
-                  <input type="text" />
+                  <Input
+                     label='Email'
+                     type='text'
+                  />
+
+                  <Input
+                     label='Пароль'
+                     type='password'
+                     errorMessage='error'
+                  />
 
                   <Button
-                     type="success"
+                     type='success'
                      onClick={ this.loginHandler }
                   >
                      Войти
                   </Button>
 
                   <Button
-                     type="primary"
+                     type='primary'
                      onClick={ this.registerHandler }
                   >
                      Зарегистрироваться
