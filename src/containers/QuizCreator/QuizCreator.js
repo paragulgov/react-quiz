@@ -75,7 +75,7 @@ class QuizCreator extends Component {
 
       try {
          const url = 'https://react-quiz-cf29d-default-rtdb.europe-west1.firebasedatabase.app/quizes.json'
-         const response = await axios.post(url, this.state.quiz)
+         await axios.post(url, this.state.quiz)
 
          this.setState({
             quiz: [],
