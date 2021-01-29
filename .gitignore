@@ -25,3 +25,8 @@ yarn-error.log*
 /.idea
 /.eslintcache
 /firebase-debug.log
+.firebase/hosting.YnVpbGQ.cache
+.github/workflows/firebase-hosting-merge.yml
+.github/workflows/firebase-hosting-pull-request.yml
+firebase.json
+.firebaserc
